@@ -104,7 +104,8 @@ test("turn cap: the child is killed and what was collected comes back", async ()
 	assert.ok(outcome.turns >= 6, `killed after maxTurns + 2 (${outcome.turns})`);
 	assert.ok(outcome.turns < 100, "did not run to the end");
 	assert.match(outcome.report, /^turn \d+ text$/);
-	assert.equal(outcome.usage.input, outcome.turns * 10);
+	// The kill on turn_start can land before that turn's message_end is written.
+	assert.ok([outcome.turns, outcome.turns - 1].map((t) => t * 10).includes(outcome.usage.input), `usage ${outcome.usage.input} for ${outcome.turns} turns`);
 });
 
 test("token cap: a child still calling tools far past the cap is killed", async () => {
