@@ -1,0 +1,20 @@
+{
+  "_help": "Per role: model (inherit | cheap | provider/id), thinking (off|minimal|low|medium|high), fallback (used when a local model server is unreachable), maxTurns, maxTokens, tools, prompt, timeoutSec, allow (regex sources for extra bash commands the git/test gate lets through). Omitted fields keep the built-in defaults. Re-read on every delegate call.",
+  "cheapModels": [
+    "local/qwen3.6-35b-a3b",
+    "deepseek/deepseek-v4-flash",
+    "openai-codex/gpt-5.3-codex-spark"
+  ],
+  "maxParallel": 4,
+  "defaultTimeoutSec": 900,
+  "roles": {
+    "researcher": { "model": "deepseek/deepseek-v4-pro", "thinking": "medium", "fallback": "openai-codex/gpt-5.4-mini" },
+    "scout": { "model": "local/qwen3.6-35b-a3b", "thinking": "low", "fallback": "deepseek/deepseek-v4-flash" },
+    "finder": { "model": "local/qwen3.6-35b-a3b", "thinking": "off", "fallback": "deepseek/deepseek-v4-flash" },
+    "git": { "model": "deepseek/deepseek-v4-flash", "thinking": "low" },
+    "web": { "model": "deepseek/deepseek-v4-flash", "thinking": "low" },
+    "test": { "model": "local/qwen3.6-35b-a3b", "thinking": "off", "fallback": "deepseek/deepseek-v4-flash" },
+    "worker": { "model": "openai-codex/gpt-5.6-sol", "thinking": "medium", "fallback": "deepseek/deepseek-v4-pro" },
+    "session": { "model": "local/qwen3.6-35b-a3b", "thinking": "low", "fallback": "deepseek/deepseek-v4-flash" }
+  }
+}

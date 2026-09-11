@@ -1,0 +1,72 @@
+{
+  "note": "Synthetic sample shaped like Copilot's GET /models response (this install has no Copilot login, 2026-09-10). Prices are cents per batch_size tokens.",
+  "data": [
+    {
+      "id": "claude-sonnet-4.6",
+      "name": "Claude Sonnet 4.6",
+      "vendor": "Anthropic",
+      "model_picker_enabled": true,
+      "policy": { "state": "enabled" },
+      "supported_endpoints": ["/v1/messages", "/chat/completions"],
+      "capabilities": {
+        "limits": { "max_context_window_tokens": 1000000, "max_output_tokens": 64000, "max_prompt_tokens": 950000 },
+        "supports": { "tool_calls": true, "vision": true, "adaptive_thinking": true, "reasoning_effort": ["low", "medium", "high", "max"] }
+      },
+      "billing": {
+        "token_prices": {
+          "batch_size": 1000000,
+          "default": { "input_price": 300, "output_price": 1500, "cache_read_price": 30, "cache_write_price": 375 }
+        }
+      }
+    },
+    {
+      "id": "gpt-5.6-sol",
+      "name": "GPT-5.6 Sol",
+      "vendor": "OpenAI",
+      "model_picker_enabled": true,
+      "policy": { "state": "enabled" },
+      "supported_endpoints": ["/responses", "/chat/completions"],
+      "capabilities": {
+        "limits": { "max_context_window_tokens": 1050000, "max_output_tokens": 128000 },
+        "supports": { "tool_calls": true, "vision": true, "reasoning_effort": ["none", "low", "medium", "high", "xhigh"] }
+      },
+      "billing": {
+        "token_prices": {
+          "batch_size": 1000000,
+          "default": { "input_price": 250, "output_price": 1500, "cache_price": 25, "cache_write_price": 312.5 },
+          "long_context": { "input_price": 500, "output_price": 2250, "cache_price": 50 }
+        }
+      }
+    },
+    {
+      "id": "kimi-k3",
+      "name": "Kimi K3",
+      "vendor": "Moonshot AI",
+      "model_picker_enabled": true,
+      "supported_endpoints": ["/chat/completions"],
+      "capabilities": { "limits": { "max_prompt_tokens": 1048576 }, "supports": { "tool_calls": true } },
+      "billing": { "token_prices": { "batch_size": 1000, "default": { "input_price": 0.3, "output_price": 1.5, "cache_price": 0.03 } } }
+    },
+    {
+      "id": "text-embedding-3-small",
+      "name": "Embedding v3 small",
+      "model_picker_enabled": false,
+      "capabilities": { "supports": { "tool_calls": false } }
+    },
+    {
+      "id": "gpt-4o-retired",
+      "name": "GPT-4o (retired)",
+      "model_picker_enabled": true,
+      "policy": { "state": "disabled" },
+      "capabilities": { "supports": { "tool_calls": true } }
+    },
+    {
+      "id": "bogus-priced",
+      "name": "Bogus",
+      "model_picker_enabled": true,
+      "supported_endpoints": ["/chat/completions"],
+      "capabilities": { "supports": { "tool_calls": true } },
+      "billing": { "token_prices": { "batch_size": 1000000, "default": { "input_price": 900000000, "output_price": 1 } } }
+    }
+  ]
+}

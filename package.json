@@ -1,0 +1,19 @@
+{
+  "name": "pi-toolkit",
+  "version": "0.1.0",
+  "description": "A cost-first toolkit for the pi coding agent: boxed tool frames, thinking HUD, auto-learn, capped subagents, prompt and tool-output compaction, cache keepalive, pricing sync and more — every module switchable from /toolkit.",
+  "license": "MIT",
+  "type": "module",
+  "keywords": ["pi-package", "pi-coding-agent", "pi-extension"],
+  "pi": {
+    "extensions": ["./index.ts"]
+  },
+  "scripts": {
+    "link-pi": "node scripts/link-pi.mjs",
+    "test": "node --test test/*.test.ts modules/*/test/*.test.ts",
+    "check": "node scripts/check.mjs"
+  },
+  "engines": {
+    "node": ">=22.19"
+  }
+}
