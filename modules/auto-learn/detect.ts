@@ -11,7 +11,7 @@
  */
 import { existsSync } from "node:fs";
 import { homedir } from "node:os";
-import { dirname, isAbsolute, join, resolve } from "node:path";
+import path, { dirname, join } from "node:path";
 
 const PATH_TOOLS = new Set(["read", "edit", "write", "grep", "find", "ls"]);
 /** Enough for any real call; a command full of paths does not buy a stat storm. */
@@ -33,6 +33,8 @@ function fromMsys(p: string, platform: string): string {
 function absolute(raw: string, cwd: string, platform: string): string | undefined {
 	const p = fromMsys(expandHome(unquote(raw.trim()).replace(/^@/, "")), platform);
 	if (!p) return undefined;
+	// Windows paths resolve by Windows rules even when tests run elsewhere.
+	const { isAbsolute, resolve } = platform === "win32" ? path.win32 : path;
 	try {
 		return isAbsolute(p) ? resolve(p) : resolve(cwd, p);
 	} catch {

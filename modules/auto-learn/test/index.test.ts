@@ -129,7 +129,8 @@ test("learn stores the lesson, draws a LEARNED row, and the lesson joins the con
 
 	const lesson = "cat needs the path from the repo root; run it from there.";
 	const r = await learn.execute("t1", { failureId: "L1", lesson }, undefined, undefined, ctx);
-	assert.match(textAt(r), /^Learned \(.+\); expires in 6d 23h\.$/);
+	// 7d 0h when the lesson is saved and formatted in the same millisecond.
+	assert.match(textAt(r), /^Learned \(.+\); expires in (?:6d 23h|7d 0h)\.$/);
 	assert.equal(r.details.status, "added");
 	const file = JSON.parse(readFileSync(join(agent, "toolkit", "learn", `${repo.key}.json`), "utf8"));
 	assert.equal(file.lessons[0].text, lesson);
