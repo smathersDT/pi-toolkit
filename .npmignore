@@ -1,0 +1,7 @@
+.github/
+.idea/
+test/
+**/test/
+scripts/
+*.tmp
+*.log

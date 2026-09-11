@@ -23,11 +23,16 @@ directory, so pi loads it on start:
 ~/.pi2/agent/extensions/toolkit/pi-toolkit/   → this package
 ```
 
-**As a package (any machine):**
+**As a package (any machine):** install a release tag; pin a newer tag to upgrade.
 
 ```sh
-pi install git:github.com/<you>/pi-toolkit      # or: pi install /path/to/pi-toolkit
+pi install git:github.com/smathersDT/pi-toolkit@v0.1.0
+pi remove git:github.com/smathersDT/pi-toolkit
+pi -e git:github.com/smathersDT/pi-toolkit      # try it for one run without installing
 ```
+
+Releases: https://github.com/smathersDT/pi-toolkit/releases. Do not combine a
+package install with the auto-discovered copy above, or every module registers twice.
 
 `package.json` declares `"pi": { "extensions": ["./index.ts"] }`; there are no
 npm dependencies (pi provides `@earendil-works/*` and `typebox`). Requires
@@ -254,10 +259,21 @@ Environment: `PI_TOOLKIT_DEBUG=1` logs module loads to stderr;
 
 ```sh
 node scripts/link-pi.mjs        # once: link the installed pi packages into node_modules
-npm test                        # node --test over core and every module (609 tests)
+npm test                        # node --test over core and every module (638 tests)
 node scripts/check.mjs          # load through pi's real loader; list registrations and prompt cost
 node scripts/check.mjs --child web
 ```
 
 Module conventions: [docs/MODULES.md](docs/MODULES.md). Adding a module is one
 directory under `modules/` plus one line in `modules/index.ts`.
+
+### Releasing
+
+```sh
+npm version patch               # or minor/major: bumps package.json, commits, tags vX.Y.Z
+git push --follow-tags
+```
+
+The tag starts `.github/workflows/release.yml`: tests on Ubuntu and Windows against
+the latest pi, then a GitHub release with generated notes. With an `NPM_TOKEN`
+repository secret it also publishes to npm (`pi install npm:pi-toolkit`).

@@ -3,8 +3,15 @@
   "version": "0.1.0",
   "description": "A cost-first toolkit for the pi coding agent: boxed tool frames, thinking HUD, auto-learn, capped subagents, prompt and tool-output compaction, cache keepalive, pricing sync and more — every module switchable from /toolkit.",
   "license": "MIT",
+  "author": "smathersDT",
   "type": "module",
   "keywords": ["pi-package", "pi-coding-agent", "pi-extension"],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/smathersDT/pi-toolkit.git"
+  },
+  "homepage": "https://github.com/smathersDT/pi-toolkit#readme",
+  "bugs": "https://github.com/smathersDT/pi-toolkit/issues",
   "pi": {
     "extensions": ["./index.ts"]
   },
@@ -12,6 +19,18 @@
     "link-pi": "node scripts/link-pi.mjs",
     "test": "node --test test/*.test.ts modules/*/test/*.test.ts",
     "check": "node scripts/check.mjs"
+  },
+  "peerDependencies": {
+    "@earendil-works/pi-ai": "*",
+    "@earendil-works/pi-coding-agent": "*",
+    "@earendil-works/pi-tui": "*",
+    "typebox": "*"
+  },
+  "peerDependenciesMeta": {
+    "@earendil-works/pi-ai": { "optional": true },
+    "@earendil-works/pi-coding-agent": { "optional": true },
+    "@earendil-works/pi-tui": { "optional": true },
+    "typebox": { "optional": true }
   },
   "engines": {
     "node": ">=22.19"
